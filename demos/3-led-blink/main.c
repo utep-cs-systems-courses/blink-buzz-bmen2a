@@ -19,11 +19,12 @@ int secondCount = 0;
 
 void
 __interrupt_vec(WDT_VECTOR) WDT()	/* 250 interrupts/sec */
+//250/2 changes the blinker time
 {
-  secondCount ++;
-  if (secondCount >= 250) { 	/* once each sec... */
+  secondCount ++; 
+  if (secondCount >= 125) { 	/* once each sec... */
     secondCount = 0;		/* reset count */
-    P1OUT ^= LED_GREEN;		/* toggle green LED */
+    P1OUT ^= LED_GREEN;         /* toggle green LED */
+    P1OUT ^= LED_RED;
   }
 } 
-

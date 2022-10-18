@@ -2,7 +2,10 @@
 #include <msp430.h>
 #include "libTimer.h"
 #include "led.h"
-
+/*
+  Improve the program & comments & use of whitepace
+  to make the program easier to understand.
+ */
 int main(void) {
   P1DIR |= LEDS;
   P1OUT &= ~LED_GREEN;
@@ -44,7 +47,8 @@ void oncePerSecond() // repeatedly start bright and gradually lower duty cycle, 
 }
 
 void secondUpdate()  // called every 1/250 sec to call oncePerSecond once per second
-{
+{// change speed 250/2 and so on
+  //=============================
   static int secondCount = 0; // state variable representing repeating time 0…1s
   secondCount ++;
   if (secondCount >= 250) { // once each second

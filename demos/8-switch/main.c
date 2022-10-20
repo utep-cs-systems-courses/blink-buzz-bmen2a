@@ -43,7 +43,7 @@ switch_interrupt_handler()
 }
 
 
-/* Switch on P1 (S2) */
+/* Switch on P1 (S2)or (S4) */
 void
 __interrupt_vec(PORT1_VECTOR) Port_1(){
   if (P1IFG & SWITCHES) {	      /* did a button cause this interrupt? */

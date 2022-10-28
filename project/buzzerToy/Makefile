@@ -24,8 +24,7 @@ all: main.elf
 
 #additional rules for files
 
-main.elf: ${COMMON_OBJECTS} main.o stateMachines.o led.o buzzer.o switches.o interrupts.o p2_interrupt_handler.o ../project/lib/libTimer.a
-
+main.elf: ${COMMON_OBJECTS} main.c stateMachines.o led.o wdInterruptHandler.o p2_interrupt_handler.o switches.o buzzer.o ../lib/libTimer.a
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 
@@ -49,7 +48,5 @@ buzzer.o:buzzer.c buzzer.h
 switches.o:switches.c switches.h 
 
 wdInterruptHandler.o: wdInterruptHandler.c
-
-
 
 p2_interrupt_handler.o: p2_interrupt_handler.c

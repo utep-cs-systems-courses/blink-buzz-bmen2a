@@ -2,6 +2,9 @@
 #include "libTimer.h"
 #include "buzzer.h"
 
+
+static int counterForSMTheme = 0; //Counter to keep track of the notes in the Super Mario Theme son
+
 void buzzer_init()
 {
     /* 
@@ -18,6 +21,27 @@ void buzzer_init()
     P2DIR = BIT6;		/* enable output to speaker (P2.6) */
 }
 
+void superMarioTheme(){
+
+  switch(counterForSMTheme){
+
+  case 0:
+
+  case 1:
+
+  case 2:
+
+  case 4: buzzer_set_period(750); counterForSMTheme++; break; //E note
+
+  case 3: buzzer_set_period(950); counterForSMTheme++; break; //C note
+
+  case 5: buzzer_set_period(630); counterForSMTheme++; break; //G note
+
+  case 6: buzzer_set_period(1260); counterForSMTheme = 0; break; //Lower G note
+
+  }
+
+}
 void buzzer_set_period(short cycles) /* buzzer clock = 2MHz.  (period of 1k results in 2kHz tone) */
 {
   CCR0 = cycles; 

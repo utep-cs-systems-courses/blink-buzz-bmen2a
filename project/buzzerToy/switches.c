@@ -10,7 +10,7 @@
 
 char switch1_state,switch2_state,switch3_state,switch4_state;
 char switch_state_changed;
-switch_state = 0;
+int switch_state = 0;
 
 
 
@@ -66,9 +66,10 @@ switch_interrupt_handler()
 
 
   if (switch1_state) //sets switch state to what was pressed
-
+    {
     switch_state = 1;
-
+    switch_state_advance();
+    }
   if (switch2_state)
 
     switch_state = 2;

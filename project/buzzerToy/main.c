@@ -21,7 +21,7 @@ int main(void){
   led_init();
 
   buzzer_init();
-
+  // buzzer_set_period(1000);/* start buzzing!!! 2MHz/1000 = 2kHz*/
   enableWDTInterrupts();
 
 

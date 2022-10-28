@@ -8,6 +8,13 @@ int main() {
     buzzer_init();
     buzzer_set_period(1000);	/* start buzzing!!! 2MHz/1000 = 2kHz*/
 
+    led_init(); //Initializes LEDs
+
+
+
+    enableWDTInterrupts(); //Enable Watch Dog Timer
+
+
 
     or_sr(0x18);          // CPU off, GIE on
 }

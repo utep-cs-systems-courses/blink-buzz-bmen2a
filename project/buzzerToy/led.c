@@ -2,7 +2,9 @@
 
 #include "led.h"
 
-#include "switches.h"
+#include "stateMachines.h"
+
+
 
 unsigned char red_on = 0,green_on = 0;
 
@@ -18,28 +20,28 @@ static char redVal[] = {0,LED_RED},greenVal[] = {0,LED_GREEN};
 void led_init(){
   P2DIR |= LEDS;// bits attached to leds are output
 
-  led_changeed=1;
+  led_changed=1;
   switch_state_changed = 1;
 
   led_update();
 }
 void led_update(){
-  
+  char ledFlags;
   if(switch_state_changed){
 
-    char ledFlags = greenVal[green_on}| redVal[red_on]; /* by default, no LEDs on */
+    ledFlags = greenVal[green_on] | redVal[red_on]; /* by default, no LEDs on */
 
 
 
-    ledFlags |= switch_state_down ? LED_GREEN : 0;
+    //ledFlags |= switch_state_down ? LED_GREEN : 0;
+    
+    //    ledFlags |= switch_state_down ? 0 : LED_RED;
 
-    ledFlags |= switch_state_down ? 0 : LED_RED;
 
 
+    P2OUT &= (0xff - LEDS) | ledFlags; // clear bits for off leds
 
-    P1OUT &= (0xff - LEDS) | ledFlags; // clear bits for off leds
-
-    P1OUT |= ledFlags;         // set bits for on leds
+    P2OUT |= ledFlags;         // set bits for on leds
     led_changed=0;
 
   }
@@ -51,9 +53,9 @@ void led_update(){
 
 
 
-    P1OUT &= (0xff^LEDS) | ledFlags;
+    P2OUT &= (0xff^LEDS) | ledFlags;
 
-    P1OUT |= ledFlags;
+    P2OUT |= ledFlags;
 
   }
   if (switch_state_changed && switch_state == 3){
@@ -62,9 +64,9 @@ void led_update(){
 
 
 
-    P1OUT &= (0xff^LEDS) | ledFlags;
+    P2OUT &= (0xff^LEDS) | ledFlags;
 
-    P1OUT |= ledFlags;
+    P2OUT |= ledFlags;
 
   }
 

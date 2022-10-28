@@ -40,10 +40,16 @@ clean:
 
 	rm -f *.o *.elf
 
-stateMachines.o: stateMachines.h
+stateMachines.o:stateMachines.c stateMachines.h
 
-led.o: led.h
+led.o:led.c led.h
 
-buzzer.o: buzzer.h
+buzzer.o:buzzer.c buzzer.h
 
-switches.o: switches.h
+switches.o:switches.c switches.h 
+
+wdInterruptHandler.o: wdInterruptHandler.c
+
+
+
+p2_interrupt_handler.o: p2_interrupt_handler.c

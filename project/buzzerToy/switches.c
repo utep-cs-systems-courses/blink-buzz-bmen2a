@@ -4,22 +4,30 @@
 
 #include "led.h"
 
-char switch_state_down, switch_state_changed; /* effectively boolean */
+#include "buzzer.h"
+
+#include "stateMachines.h"
+
+char switch1_state,switch2_state,switch3_state,switch4_state;
+char switch_state_changed;
+switch_state = 0;
+
+
 
 static char
 switch_update_interrupt_sense()
 
 {
 
-  char p1val = P1IN;
+  char p2val = P2IN;
 
   /* update switch interrupt to detect changes from current buttons */
 
-  P1IES |= (p1val & SWITCHES);/* if switch up, sense down */
+  P2IES |= (p2val & SWITCHES);/* if switch up, sense down */
 
-  P1IES &= (p1val | ~SWITCHES);/* if switch down, sense up */
+  P2IES &= (p2val | ~SWITCHES);/* if switch down, sense up */
 
-  return p1val;
+  return p2val;
 
 }
 void
@@ -28,17 +36,16 @@ switch_init()/* setup switch */
 
 {
 
-  P1REN |= SWITCHES;/* enables resistors for switches */
+  P2REN |= SWITCHES;/* enables resistors for switches */
 
-  P1IE |= SWITCHES;/* enable interrupts from switches */
+  P2IE |= SWITCHES;/* enable interrupts from switches */
 
-  P1OUT |= SWITCHES;/* pull-ups for switches */
+  P2OUT |= SWITCHES;/* pull-ups for switches */
 
   P2DIR &= ~SWITCHES;/* set switches' bits for input */
 
   switch_update_interrupt_sense();
 
-  led_update();
 
 }
 void
@@ -47,12 +54,34 @@ switch_interrupt_handler()
 
 {
 
-  char p1val = switch_update_interrupt_sense();
+  char p2val = switch_update_interrupt_sense();
 
-  switch_state_down = (p1val & SW1) ? 0 : 1; /* 0 when SW1 is up */
+  switch1_state = (p2val & SW1) ? 0 : 1; //tells which button of the 4 were pressed
 
-  switch_state_changed = 1;
+  switch2_state = (p2val & SW2) ? 0 : 1;
 
-  led_update();
+  switch3_state = (p2val & SW3) ? 0 : 1;
 
+  switch4_state = (p2val & SW4) ? 0 : 1;
+
+
+  if (switch1_state) //sets switch state to what was pressed
+
+    switch_state = 1;
+
+  if (switch2_state)
+
+    switch_state = 2;
+
+  if (switch3_state)
+
+    switch_state = 3;
+
+  if (switch4_state)
+
+    switch_state = 4;
+
+
+
+  switch_state_changed = 1; //make sure to show a button was pressed
 }

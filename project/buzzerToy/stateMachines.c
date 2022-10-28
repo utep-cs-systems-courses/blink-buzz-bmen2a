@@ -70,13 +70,13 @@ void switch_state_advance(){
 
   switch (switch_state){
   case 1:
-    buzzer_set_period(1300); //buzzer is set to a input when a certain button is pressed
+    buzzer_set_period(1200); //buzzer is set to a input when a certain button is pressed
     break;
   case 2:
-    buzzer_set_period(200);
+    buzzer_set_period(300);
     break;
   case 3:
-    buzzer_set_period(700);
+    buzzer_set_period(800);
     break;
   case 4:
     buzzer_off();

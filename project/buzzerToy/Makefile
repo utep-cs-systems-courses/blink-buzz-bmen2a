@@ -13,8 +13,7 @@ LDFLAGS = -L/opt/ti/msp430_gcc/include
 #switch compiler
 
 CC = msp430-elf-gcc
-
-#AS = msp430-elf-as
+AS = msp430-elf-as
 
 
 
@@ -26,7 +25,9 @@ all: main.elf
 
 main.elf: ${COMMON_OBJECTS} main.c stateMachines.o led.o wdInterruptHandler.o p2_interrupt_handler.o switches.o buzzer.o ../lib/libTimer.a
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
+main-s.elf: ${COMMON_OBJECTS} assembly-s.o
 
+	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ ../lib/libTimer.a
 
 
 load: main.elf

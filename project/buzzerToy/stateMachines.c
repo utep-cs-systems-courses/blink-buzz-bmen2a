@@ -19,11 +19,14 @@ char toggle_red(){ //toggle methods for the state machine, alwayys toggle
   case 0:
     red_on = 1;
     state = 1;
+    buzzer_set_period(3000);
     break;
 
   case 1:
     red_on = 0;
     state = 0;
+    //buzzer_set_period(1000);
+    
     break;
   }
   return 1;  //led always changes
@@ -34,7 +37,7 @@ char toggle_green(){
   if (red_on){
 
     green_on ^= 1;
-
+    //    buzzer_set_period(1000);
     changed = 1;
 
   }
@@ -70,16 +73,16 @@ void switch_state_advance(){
 
   switch (switch_state){
   case 1:
-    buzzer_set_period(1200); //buzzer is set to a input when a certain button is pressed
+    //buzzer_set_period(1200); //buzzer is set to a input when a certain button is pressed
     break;
   case 2:
-    buzzer_set_period(300);
+    //buzzer_set_period(500);
     break;
   case 3:
-    buzzer_set_period(800);
+    //buzzer_set_period(900);
     break;
   case 4:
-    buzzer_off();
+   
     break;
   }
   led_update(); //after the state is set it will update the leds accordingly

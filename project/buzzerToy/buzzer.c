@@ -29,13 +29,3 @@ void buzzer_set_period(short cycles){
   CCR1 = cycles >> 1;
 
 }
-
-
-
-void buzzer_off(){
-
-  CCR0 = 0;
-
-  CCR1 = 0;
-
-}

@@ -1,26 +1,26 @@
 	.arch msp430g2553
 
 	.p2align 1,0
-
-
-
 	.text
 
 
 
 def:
 
-	.word
-
+	.global toggle_green
+	.extern green_on
+	.extern red_on
 
 
 
 toggle_green:
-	.cmp #0, r12 		; if(red_on)
-	jz off
-	bis #64, &green_on	;green_on ^=1
-				; changed=1
+	.word changed
+	.movb #0, &changed
+	.cmp #0, red_on 	; if(red_on)
+	jmp off
+	xor  #1, &green_on	;green_on ^=1
+	movb #1, &changed	; changed=1
 	pop r0
 off:	
 
-	pop r0 			;return changed
+	return changed		;return changed

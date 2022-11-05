@@ -15,12 +15,13 @@ def:
 
 toggle_green:
 	.word changed
-	.movb #0, &changed
+	.mov #0, &changed
+	.mov &changed, r12
 	.cmp #0, red_on 	; if(red_on)
-	jmp off
+	je off
 	xor  #1, &green_on	;green_on ^=1
-	movb #1, &changed	; changed=1
+	mov.b #1, r12		; changed=1
 	pop r0
 off:	
 
-	return changed		;return changed
+	ret		;return changed

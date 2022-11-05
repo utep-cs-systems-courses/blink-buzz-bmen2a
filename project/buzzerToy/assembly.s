@@ -10,22 +10,17 @@
 
 def:
 
-	.word caseR
-
-	.word caseG
+	.word
 
 
 
 
+toggle_green:
+	.cmp #0, r12 		; if(red_on)
+	jz off
+	bis #64, &green_on	;green_on ^=1
+				; changed=1
+	pop r0
+off:	
 
-led_state_advance:
-
-caseR:	
-	call #toggle_red
-	jmp out
-caseG:
-	call #toggle_green
-	jmp out
-out:
-
-	ret
+	pop r0 			;return changed

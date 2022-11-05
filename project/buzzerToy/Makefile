@@ -16,7 +16,6 @@ CC = msp430-elf-gcc
 AS = msp430-elf-as
 
 
-
 all: main.elf
 
 
@@ -29,9 +28,7 @@ main-s.elf: ${COMMON_OBJECTS} assembly-s.o
 
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ ../lib/libTimer.a
 
-
 load: main.elf
-
 	msp430loader.sh main.elf
 
 

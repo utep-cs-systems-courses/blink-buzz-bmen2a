@@ -10,10 +10,11 @@
 
 
 toggle_green:
-	.word changed
-	.mov #0, &changed
-	.mov &changed, r12
-	.cmp #0, red_on 	; if(red_on)
+	.data
+	.byte changed
+	mov.b #0, &changed
+	mov.b &changed, r12
+	cmp #0, red_on 	; if(red_on)
 	je off
 	xor  #1, &green_on	;green_on ^=1
 	mov.b #1, r12		; changed=1

@@ -8,6 +8,7 @@
 
 #include "buzzer.h"
 
+#include "toggleGreen.c"
 char toggle_red(){ //toggle methods for the state machine, alwayys toggle
 
   static char state = 0;
@@ -31,18 +32,6 @@ char toggle_red(){ //toggle methods for the state machine, alwayys toggle
   }
   return 1;  //led always changes
 
-}
-char toggle_green(){
-  char changed=0;
-  if (red_on){
-
-    green_on ^= 1;
-    //    buzzer_set_period(1000);
-    changed = 1;
-
-  }
-
-  return changed;
 }
 void led_state_advance(){
 

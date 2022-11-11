@@ -37,7 +37,7 @@ clean:
 
 	rm -f *.o *.elf
 
-stateMachines.o:stateMachines.c stateMachines.h
+stateMachines.o:stateMachines.c stateMachines.h toggleGreen.c
 
 led.o:led.c led.h
 

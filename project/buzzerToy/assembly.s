@@ -11,13 +11,14 @@
 
 toggle_green:
 	.word changed
-	.mov #0, &changed
-	.mov &changed, r12
+	.mov #changed, r12
+	.mov #0, &r12
 	.cmp #0, red_on 	; if(red_on)
 	je off
 	xor  #1, &green_on	;green_on ^=1
-	mov.b #1, r12		; changed=1
+	mov.b #1, r12
+	mov.b r12, r0			; changed=1
 	pop r0
 off:	
-
-	ret		;return changed
+	mob.b #changed, r0
+	pop r0  	;return changed

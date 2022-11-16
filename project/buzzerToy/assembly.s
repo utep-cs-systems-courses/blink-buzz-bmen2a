@@ -20,5 +20,5 @@ toggle_green:
 	mov.b r12, r0			; changed=1
 	pop r0
 off:	
-	mob.b #changed, r0
+	mov.b r12, r0
 	pop r0  	;return changed
